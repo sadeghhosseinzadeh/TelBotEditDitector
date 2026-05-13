@@ -4,8 +4,9 @@ from telegram.ext import Application, MessageHandler, filters
 from datetime import timedelta
 
 TOKEN = os.getenv("BOT_TOKEN")
-ADMINS = [540105210, 1029379671]
 
+ADMINS = os.getenv("ADMINS", "")
+ADMINS = [int(x) for x in ADMINS.split(",") if x.strip()]
 
 async def new_post(update, context):
     msg = update.channel_post
