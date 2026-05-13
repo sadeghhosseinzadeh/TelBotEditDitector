@@ -1,18 +1,12 @@
-!pip install python-telegram-bot==21.1
-
 import asyncio
+import os
 from telegram.ext import Application, MessageHandler, filters
 from datetime import timedelta
-import os
-
 
 TOKEN = os.getenv("BOT_TOKEN")
-ADMINS = [540105210, 1029379671] 
+ADMINS = [540105210, 1029379671]
 
 
-# -------------------------
-# NEW POSTS HANDLER
-# -------------------------
 async def new_post(update, context):
     msg = update.channel_post
     if not msg:
@@ -47,9 +41,6 @@ async def new_post(update, context):
             await context.bot.send_message(admin, full_caption)
 
 
-# -------------------------
-# EDITED POSTS HANDLER
-# -------------------------
 async def edited_post(update, context):
     msg = update.edited_channel_post
     if not msg:
@@ -84,16 +75,10 @@ async def edited_post(update, context):
             await context.bot.send_message(admin, full_caption)
 
 
-# -------------------------
-# MAIN BOT SETUP
-# -------------------------
 async def main():
     app = Application.builder().token(TOKEN).build()
 
-    # NEW posts
     app.add_handler(MessageHandler(filters.UpdateType.CHANNEL_POST, new_post))
-
-    # EDITED posts
     app.add_handler(MessageHandler(filters.UpdateType.EDITED_CHANNEL_POST, edited_post))
 
     print("Bot is running...")
@@ -102,8 +87,8 @@ async def main():
     await app.start()
     await app.updater.start_polling()
 
-    # Keeps the bot alive
-    await asyncio.Event().wait()
+    await asyncio.sleep(60)  
 
 
-await main()
+if __name__ == "__main__":
+    asyncio.run(main())
