@@ -5,6 +5,11 @@ on:
     - cron: "*/27 * * * *"
   workflow_dispatch:         # allow manual run
 
+permissions:
+  contents: read
+  actions: read
+  id-token: write
+
 jobs:
   run-bot:
     runs-on: ubuntu-latest
