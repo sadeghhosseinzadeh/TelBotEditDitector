@@ -82,17 +82,10 @@ async def main():
     app.add_handler(MessageHandler(filters.UpdateType.CHANNEL_POST, new_post))
     app.add_handler(MessageHandler(filters.UpdateType.EDITED_CHANNEL_POST, edited_post))
 
-    print("Bot is running...")
+    print("Bot is running for 60 seconds...")
 
-    await app.initialize()
-    await app.start()
-    await app.updater.start_polling()
-
-    # Run for 60 seconds only
-    await asyncio.sleep(60)
-
-    await app.stop()
-    await app.shutdown()
+    # This runs polling AND stops automatically after 60 seconds
+    await app.run_polling(stop_after=60)
 
 
 if __name__ == "__main__":
