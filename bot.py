@@ -84,8 +84,22 @@ async def main():
 
     print("Bot is running for 60 seconds...")
 
-    # This runs polling AND stops automatically after 60 seconds
-    await app.run_polling(stop_after=60)
+    # Initialize manually
+    await app.initialize()
+
+    # Start receiving updates WITHOUT background threads
+    await app.start()
+    await app.updater.start_polling(poll_interval=1, bootstrap_retries=0)
+
+    # Run for exactly 60 seconds
+    await asyncio.sleep(60)
+
+    # Stop everything cleanly
+    await app.updater.stop()
+    await app.stop()
+    await app.shutdown()
+
+    print("Bot stopped cleanly.")
 
 
 if __name__ == "__main__":
