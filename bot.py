@@ -88,7 +88,11 @@ async def main():
     await app.start()
     await app.updater.start_polling()
 
-    await asyncio.sleep(60)  
+    # Run for 60 seconds only
+    await asyncio.sleep(60)
+
+    await app.stop()
+    await app.shutdown()
 
 
 if __name__ == "__main__":
