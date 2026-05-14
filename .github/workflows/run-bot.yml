@@ -2,7 +2,7 @@ name: Run Telegram Bot 2 Times a day
 
 on:
   schedule:
-    - cron: "18 5,13 * * *"
+    - cron: "27 * * * *"
   workflow_dispatch:         # allow manual run
 
 jobs:
