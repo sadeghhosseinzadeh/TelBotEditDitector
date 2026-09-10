@@ -12,7 +12,7 @@ async def new_post(update, context):
     msg = update.channel_post
     if not msg:
         return
-
+    
     caption = msg.caption or "(no caption)"
     message_id = msg.message_id
     channel_name = msg.chat.title or "Unknown Channel"
@@ -84,7 +84,8 @@ async def main():
 
     print("Bot is running for 60 seconds...")
 
-    # Initialize manually
+    
+    # Initialize_manually
     await app.initialize()
 
     # Start receiving updates WITHOUT background threads
